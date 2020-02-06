@@ -1,5 +1,4 @@
 console.clear()
-console.log("=========================================================================================================================================")
 let data = [
     { name: 'Suketu Patel', email: 'suketupatel29@gmail.com', age: '21', gender: 'Male' },
     { name: 'Ashish Fatnani', email: 'ashish@gmail.com', age: '21', gender: 'Male' },
@@ -45,10 +44,8 @@ const VALIDATE = (() => {
                 return false
             }
         },
-
     }
 })();
-
 const inputValidator = (userInfo) => {
     const { name, email, age, gender } = userInfo;
     if (VALIDATE.name(name)
@@ -93,17 +90,26 @@ const CRUD = (() => {
             data = newData
         },
         sort: (key) => {
-            console.log(">>>", data.sort((a, b) => (a[key] === b[key]) ? 0 : (a[key] > b[key] ? 1 : -1)))
+            let sortedData = [...data]
+            sortedData.sort((a, b) => (a[key] === b[key]) ? 0 : (a[key] > b[key] ? 1 : -1))
+            console.log(">>>>>>>>>>SORTED USER LIST<<<<<<<<<<<")
+            sortedData.forEach((item,i)=>{
+                console.log(`============================== User ${i} ====================================\n`)
+                console.log("Name:",item.name);
+                console.log("Email:",item.email);
+                console.log("Age:",item.age);
+                console.log("Gender:",item.gender);
+                console.log("\n");
+            })
+            console.log(">>>>>>>>>>END OF USER LIST<<<<<<<<<<<");
         }
     }
 })();
 // CRUD.create("Suketu", "asd", "21", "Male");
 // CRUD.create("Suketu", "asd@gmail.com", "21", "Male");
 CRUD.create("Deep", "asd@gmsail.com", "21", "Male");
-CRUD.update("suketupatel29@gmail.com", "email", "suketupatel291@gmail.com")
-CRUD.update("suketupatel291@gmail.com", "name", "SuketuD Patel")
-CRUD.update("suketupatel291@gmail.com", "age", "22")
-console.log(data)
+CRUD.update("suketupatel29@gmail.com", "email", "suketupatel291@gmail.com");
+CRUD.update("suketupatel291@gmail.com", "name", "SuketuD Patel");
+CRUD.update("suketupatel291@gmail.com", "age", "22");
 // CRUD.delete("suketupatel291@gmail.com")
-console.log("After Delete: ", data)
-CRUD.sort("name")
+CRUD.sort("name");
