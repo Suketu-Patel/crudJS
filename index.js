@@ -37,7 +37,7 @@ const VALIDATE = (() => {
             }
         },
         gender: (gender) => {
-            gender=gender.toLowerCase();
+            gender = gender.toLowerCase();
             if (gender === "male" || gender === "female") {
                 return true
             } else {
@@ -70,7 +70,7 @@ const CRUD = (() => {
                     name: name,
                     email: email.toLowerCase(),
                     age: age,
-                    gender: gender
+                    gender: gender.toLowerCase()
                 })
             } else {
                 console.error("Cannot create new entry due to input error(s)")
@@ -81,25 +81,29 @@ const CRUD = (() => {
             console.log(uNode)
         },
         update: (email, key, value) => {
-            if(VALIDATE[key](value)){
+            if (VALIDATE[key](value)) {
                 let uNode = data.filter((item) => item.email === email)
                 uNode[0][key] = value;
-            }else{
+            } else {
                 console.error(`${key} couldn't be updated`)
             }
         },
-        delete: (email)=>{
+        delete: (email) => {
             let newData = data.filter((item) => item.email !== email)
-            data=newData
+            data = newData
+        },
+        sort: (key) => {
+            console.log(">>>", data.sort((a, b) => (a[key] === b[key]) ? 0 : (a[key] > b[key] ? 1 : -1)))
         }
     }
 })();
 // CRUD.create("Suketu", "asd", "21", "Male");
 // CRUD.create("Suketu", "asd@gmail.com", "21", "Male");
-// CRUD.create("Suketu", "asd@gmsail.com", "221", "Male");
+CRUD.create("Deep", "asd@gmsail.com", "21", "Male");
 CRUD.update("suketupatel29@gmail.com", "email", "suketupatel291@gmail.com")
 CRUD.update("suketupatel291@gmail.com", "name", "SuketuD Patel")
 CRUD.update("suketupatel291@gmail.com", "age", "22")
 console.log(data)
-CRUD.delete("suketupatel291@gmail.com")
-console.log("After Delete: ",data)
+// CRUD.delete("suketupatel291@gmail.com")
+console.log("After Delete: ", data)
+CRUD.sort("name")
